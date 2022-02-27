@@ -52,3 +52,10 @@ $te_install/bin/unix/viewlog.sh -logdir=$TE_BASE/users/stefan/ -session=s0004
 ## Links
 
 - HTML-Report (nur mit Webserver?): https://github.com/opengeospatial/teamengine/issues/331
+
+## TODO
+
+- HTML-Report
+- Paketierung 
+- Organisation Code in Repo (-> siehe die Github-Repos der ets-XXXX)
+- Was genau ist all-in-one? Alles ausser teamengine runtime? Wie startet man das aber?
