@@ -39,6 +39,16 @@ unzip teamengine-console/target/teamengine-console-5.5-SNAPSHOT-base.zip -d $TE_
 $te_install/bin/unix/test.sh -source=$TE_BASE/scripts/note/1.0/ctl/note.ctl
 ```
 
+Show log files:
+```
+$te_install/bin/unix/viewlog.sh -logdir=$TE_BASE/users/stefan/ -session=s0004
+```
+
 ## Examples
 
 - https://github.com/opengeospatial/ets-wms13/blob/master/src/main/scripts/ctl/main.xml
+
+
+## Links
+
+- HTML-Report (nur mit Webserver?): https://github.com/opengeospatial/teamengine/issues/331
