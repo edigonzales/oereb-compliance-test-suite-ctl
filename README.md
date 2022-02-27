@@ -38,3 +38,7 @@ unzip teamengine-console/target/teamengine-console-5.5-SNAPSHOT-base.zip -d $TE_
 ```
 $te_install/bin/unix/test.sh -source=$TE_BASE/scripts/note/1.0/ctl/note.ctl
 ```
+
+## Examples
+
+- https://github.com/opengeospatial/ets-wms13/blob/master/src/main/scripts/ctl/main.xml
