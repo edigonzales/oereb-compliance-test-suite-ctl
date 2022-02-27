@@ -32,3 +32,9 @@ export TE_BASE=~/tmp/TE_BASE
 ```
 unzip teamengine-console/target/teamengine-console-5.5-SNAPSHOT-base.zip -d $TE_BASE
 ```
+
+## Run sample test suite
+
+```
+$te_install/bin/unix/test.sh -source=$TE_BASE/scripts/note/1.0/ctl/note.ctl
+```
