@@ -5,124 +5,86 @@
 
   <ctl:suite name="oereb:oereb-test">
     <ctl:title>OEREB V2_0 test suite</ctl:title>
-    <ctl:description>Checks the content of a note.</ctl:description>
+    <ctl:description>Checks the compliance of a ÖREB Webservice and DATA Extracts (V2.0).</ctl:description>
     <ctl:starting-test>oereb:main</ctl:starting-test>
 
       <ctl:form xmlns="">
-            <h3>Web Map Service 1.3.0</h3>
+          <div style="margin: 20px;">
+            <h3>ÖREB Webservice 2.0</h3>
 
-            <h4>Test Overview and Reference Implementations</h4>
-            <p>Complete information about this test suite can be found <a href="." target="_blank">here</a>.</p>
-            <p>Reference implementations can be found <a href="http://cite.opengeospatial.org/reference" target="_blank">here</a>.</p>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
             <br/>
-            <h4>Capabilities Setup</h4>
+            <h4>ÖREB-Webservice</h4>
             <p>
-               Enter a capabilities document URL below. The URL may point to a static capabilities document or a GetCapabilities request from a WMS. A typical GetCapabilities request will look as follows:
+               Basis-URL des ÖREB-Webservices: 
+               <!--
+               <br/>
+               <br/>
+               Richtig: <tt>https://example.com/oereb/</tt>
+               <br/>
+               Falsch: <tt>https://example.com/oereb/extract/xml/?EGRID=CH887722167773</tt>
+               -->
             </p>
-            <pre>http://hostname/path?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.3.0</pre>
             <br/>
             <blockquote>
-               <table style="border: 1px solid blue;" padding="3">
+               <table style="border: 1px solid #D3D3D3;" padding="3">
                   <tr>
                      <td align="center">
-                        <input name="capabilities-url" size="100" type="text" value=""/>
+                        <input name="capabilities-url" size="100" type="text" value="https://oereb-ur-proc.geocloud.ch/oereb/"/>
                      </td>
-                     <td align="left">Capabilities URL</td>
+                     <td align="left">Basis-URL</td>
                   </tr>
                </table>
             </blockquote>
             <br/>
-            <h4>UpdateSequence Values</h4>
             <p>
-               The WMS specification allows servers to use an UpdateSequence value for
-               maintaining cache consistency as described in 
-               <a href="http://cite.opengeospatial.org/OGCTestData/wms/1.3.0/spec/wms1_3.html#wmsops.getcapabilities.params.updatesequence">Section 7.2.3.5 of the specification</a>.
-               If the server advertises an UpdateSequence value and the
-               Automatic option is selected below, the test suite will attempt to
-               test the UpdateSequence behavior automatically. However, the
-               lexical ordering of UpdateSequence values is determined by the
-               server, so the tests may not always be correct. If you suspect a
-               problem, select the Manual option and enter the updateSequence
-               values requested below.
+               GetEGRID-Parameter: 
             </p>
+            <br/>
             <blockquote>
-               <table border="3" padding="3">
+               <table style="border: 1px solid #D3D3D3;" padding="3">
                   <tr>
                      <td align="center">
-                        <input checked="checked" name="updatesequence" type="radio" value="auto"/>
+                        <input name="en-coord" size="100" type="text" value="2690481.2,1195464.8"/>
                      </td>
-                     <td align="left">Automatic - The updateSequence tests will use automatically generated updateSequence values</td>
+                     <td align="left">E/N-Landeskoordinaten (LV95)</td>
                   </tr>
                   <tr>
                      <td align="center">
-                        <input name="updatesequence" type="radio" value="manual"/>
+                        <input name="gnss-coord" size="100" type="text" value="46.90413,8.62621"/>
                      </td>
-                     <td align="left">Manual - The updateSequence tests will use the values supplied below</td>
-                  </tr>
-               </table>
-            </blockquote>
-            <p>(Fill in these boxes if the Manual option is selected above)</p>
-            <blockquote>
-               <table border="3" padding="3">
-                  <tr>
-                     <td align="center">
-                        <input name="high-updatesequence" size="25" type="text" value=""/>
-                     </td>
-                     <td align="left">A value that is lexically higher than the current updateSequence value</td>
-                  </tr>
-                  <tr>
-                     <td align="center">
-                        <input name="low-updatesequence" size="25" type="text" value=""/>
-                     </td>
-                     <td align="left">A value that is lexically lower than the current updateSequence value</td>
+                     <td align="left">GNSS-Positionskoordinaten (WGS84)</td>
                   </tr>
                </table>
             </blockquote>
             <br/>
-            <h4>Options</h4>
+            <h4>Optionen</h4>
             <blockquote>
-               <table border="3" padding="3">
+               <table style="border: 1px solid #D3D3D3;" padding="3">
                   <tr>
                      <td align="center">
-                        <input name="basic" type="checkbox" value="basic" checked="checked"/>
+                        <input name="getegrid" type="checkbox" value="getegrid" checked="checked"/>
                      </td>
-                     <td align="left">BASIC - Test basic functionality that depends on the CITE dataset.  This option is required for certification.</td>
+                     <td align="left">GetEGRID - Prüft die GetEgrid()-Funktion.</td>
                   </tr>
                   <tr>
                      <td align="center">
-                        <input name="queryable" type="checkbox" value="queryable" checked="checked"/>
+                        <input name="getextractbyid" type="checkbox" value="getextractbyid" checked="checked"/>
                      </td>
-                     <td align="left">QUERYABLE - Test GetFeatureInfo functionality that depends on the CITE dataset.</td>
+                     <td align="left"><strike>GetExtractById - Prüft die GetExtractById()-Funktion.</strike></td>
                   </tr>
                   <tr>
                      <td align="center">
-                        <input name="raster_elevation" type="checkbox" value="raster_elevation"/>
+                        <input name="getcapabilities" type="checkbox" value="getcapabilities" checked="checked"/>
                      </td>
-                     <td align="left">RASTER ELEVATION - Test the elevation dimension using the cite:Terrain raster dataset.</td>
-                  </tr>
-                  <tr>
-                     <td align="center">
-                        <input name="vector_elevation" type="checkbox" value="vector_elevation"/>
-                     </td>
-                     <td align="left">VECTOR ELEVATION - Test the elevation dimension using the cite:Lakes vector dataset.</td>
-                  </tr>
-                  <tr>
-                     <td align="center">
-                        <input name="time" type="checkbox" value="time"/>
-                     </td>
-                     <td align="left">TIME - Test the time dimension using the cite:Autos dataset.</td>
-                  </tr>
-                  <tr>
-                     <td align="center">
-                        <input name="recommended" type="checkbox" value="recommended"/>
-                     </td>
-                     <td align="left">RECOMMENDATIONS - Test functionality which is recommended in the specification.</td>
+                     <td align="left"><strike>GetCapabilities - Prüft die GetCapabilities()-Funktion.</strike></td>
                   </tr>
                </table>
             </blockquote>
             <br/>
             <input type="submit" value="OK"/>
+          </div>
       </ctl:form>
 
   </ctl:suite>

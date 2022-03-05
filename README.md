@@ -39,6 +39,11 @@ unzip teamengine-console/target/teamengine-console-5.5-SNAPSHOT-base.zip -d $TE_
 $te_install/bin/unix/test.sh -source=$TE_BASE/scripts/note/1.0/ctl/note.ctl
 ```
 
+```
+$te_install/bin/unix/test.sh -source=$TE_BASE/scripts/oereb/2.0/ctl/main.ctl
+```
+
+
 Show log files:
 ```
 $te_install/bin/unix/viewlog.sh -logdir=$TE_BASE/users/stefan/ -session=s0004
@@ -52,9 +57,11 @@ $te_install/bin/unix/viewlog.sh -logdir=$TE_BASE/users/stefan/ -session=s0004
 ## Links
 
 - HTML-Report (nur mit Webserver?): https://github.com/opengeospatial/teamengine/issues/331
+- Schemavalidierung: https://github.com/opengeospatial/teamengine/issues/64
 
 ## TODO
 
+- Schemaprüfung ohne Java-Code?
 - HTML-Report
 - Paketierung 
 - Organisation Code in Repo (-> siehe die Github-Repos der ets-XXXX)
