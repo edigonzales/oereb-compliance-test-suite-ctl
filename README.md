@@ -58,6 +58,7 @@ $te_install/bin/unix/viewlog.sh -logdir=$TE_BASE/users/stefan/ -session=s0004
 
 - HTML-Report (nur mit Webserver?): https://github.com/opengeospatial/teamengine/issues/331
 - Schemavalidierung: https://github.com/opengeospatial/teamengine/issues/64
+- https://whatsmychaincert.com/
 
 ## TODO
 

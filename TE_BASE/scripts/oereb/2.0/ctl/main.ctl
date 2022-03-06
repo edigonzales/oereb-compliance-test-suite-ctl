@@ -8,7 +8,7 @@
     <ctl:description>Checks the compliance of a ÖREB Webservice and DATA Extracts (V2.0).</ctl:description>
     <ctl:starting-test>oereb:main</ctl:starting-test>
 
-      <ctl:form xmlns="">
+      <ctl:form xmlns="" height="800">
           <div style="margin: 20px;">
             <h3>ÖREB Webservice 2.0</h3>
 
@@ -31,7 +31,7 @@
                <table style="border: 1px solid #D3D3D3;" padding="3">
                   <tr>
                      <td align="center">
-                        <input name="capabilities-url" size="100" type="text" value="https://oereb-ur-proc.geocloud.ch/oereb/"/>
+                        <input name="base-url" size="100" type="text" value="https://oereb-ur-proc.geocloud.ch/oereb/"/>
                      </td>
                      <td align="left">Basis-URL</td>
                   </tr>
@@ -91,12 +91,103 @@
 
 
   <ctl:test name="oereb:main">
-    <ctl:assertion>The heading contains more than whitespace.</ctl:assertion>
+    <ctl:param name="base-url"/>
+    <ctl:param name="en-coord"/>
+    <ctl:assertion>OEREB Main</ctl:assertion>
     <ctl:code>
+      <ctl:message>Base-URL: <xsl:value-of select="$base-url"/></ctl:message>
+      <ctl:call-test name="oereb:getegrid">
+              <ctl:with-param name="base-url" select="$base-url"/>
+              <ctl:with-param name="en-coord" select="$en-coord"/>
+      </ctl:call-test>
+
+      <!--
+      <ctl:call-test name="oereb:pass"/>
+      <ctl:call-test name="oereb:fail"/>
+      <ctl:call-test name="oereb:form">
+              <ctl:with-param name="base-url" select="$base-url"/>
+      </ctl:call-test>
+      -->
+      <!--
       <xsl:if test="1">
+        <ctl:fail/>
+      </xsl:if>
+      -->
+    </ctl:code>
+  </ctl:test>
+
+  <ctl:test name="oereb:getegrid">
+    <ctl:param name="base-url"></ctl:param>
+    <ctl:param name="en-coord"></ctl:param>
+
+    <ctl:assertion>GetEGRID</ctl:assertion>
+    <ctl:code>
+
+      <ctl:request>
+        <ctl:url>https://prozessor-oereb.ur.ch/oereb/getegrid/xml/?EN=2688427,1166114</ctl:url>
+          <!--<xsl:value-of select="$base-url"/>-->
+        
+        <ctl:method>GET</ctl:method>
+      </ctl:request>
+ 
+    </ctl:code>
+  </ctl:test>
+
+
+
+
+  <ctl:test name="oereb:pass">
+    <ctl:assertion>Pass</ctl:assertion>
+    <ctl:code>
+    </ctl:code>
+  </ctl:test>
+
+  <ctl:test name="oereb:fail">
+    <ctl:assertion>Fail</ctl:assertion>
+    <ctl:code>
+      <ctl:fail/>
+    </ctl:code>
+  </ctl:test>
+
+  <ctl:test name="oereb:form">
+    <ctl:param name="base-url"></ctl:param>
+    <ctl:assertion>Form</ctl:assertion>
+    <ctl:code>
+    <!--
+      <xsl:variable name="form-values">
+        <ctl:form>
+          <p>Select an XML file:</p>
+          <input name="myupload" type="file" />
+          <br/>
+          <input type="submit" value="OK" />
+          <ctl:parse file="myupload" />
+        </ctl:form>
+      </xsl:variable>
+      <ctl:message>Base-URL: <xsl:value-of select="$base-url"/></ctl:message>
+      <ctl:message>
+        <xsl:text>The root element is named </xsl:text>
+        <xsl:value-of select="name($form-values/values/value[@key='myupload']/*) "/>
+      </ctl:message>
+      -->
+      <xsl:variable name="form-values">
+        <ctl:form>
+          <p>
+            <img src="http://www.google.com/intl/en/images/logo.gif"/><br/>
+            Do you see the Google logo?<br/>
+            <input type="submit" name="answer" value="yes"/>
+            <input type="submit" name="answer" value="no"/>
+          </p>
+        </ctl:form>
+      </xsl:variable>
+      <ctl:message>
+        <xsl:text>The answer is </xsl:text>
+        <xsl:value-of select="$form-values/values/value[@key='answer'] "/>
+      </ctl:message>
+      <xsl:if test="$form-values/values/value[@key='answer']='no'">
         <ctl:fail/>
       </xsl:if>
     </ctl:code>
   </ctl:test>
+
 
 </ctl:package>
