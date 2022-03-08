@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ctl:package xmlns:ctl="http://www.occamlab.com/ctl"
- xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
- xmlns:oereb="http://cadastre.ch/oereb">
+<ctl:package 
+  xmlns:ctl="http://www.occamlab.com/ctl"
+  xmlns:ctlp="http://www.occamlab.com/te/parsers"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:oereb="http://cadastre.ch/oereb"
+>
 
   <ctl:suite name="oereb:oereb-test">
     <ctl:title>OEREB V2_0 test suite</ctl:title>
@@ -31,7 +34,7 @@
                <table style="border: 1px solid #D3D3D3;" padding="3">
                   <tr>
                      <td align="center">
-                        <input name="base-url" size="100" type="text" value="https://oereb-ur-proc.geocloud.ch/oereb/"/>
+                        <input name="base-url" size="100" type="text" value="https://prozessor-oereb.ur.ch/oereb/"/>
                      </td>
                      <td align="left">Basis-URL</td>
                   </tr>
@@ -122,14 +125,23 @@
 
     <ctl:assertion>GetEGRID</ctl:assertion>
     <ctl:code>
+      <xsl:variable name="response">
 
-      <ctl:request>
-        <ctl:url>https://prozessor-oereb.ur.ch/oereb/getegrid/xml/?EN=2688427,1166114</ctl:url>
-          <!--<xsl:value-of select="$base-url"/>-->
-        
-        <ctl:method>GET</ctl:method>
-      </ctl:request>
- 
+        <ctl:request>
+          <ctl:url><xsl:value-of select="$base-url"/>/getegrid/xml/?en=<xsl:value-of select="$en-coord"/></ctl:url>        
+          <ctl:method>GET</ctl:method>
+          <ctlp:XMLValidatingParser>
+            <ctlp:schemas>
+              <ctlp:schema type="url">http://schemas.geo.admin.ch/V_D/OeREB/2.0/Extract.xsd</ctlp:schema>
+              <!--<ctlp:schema type="file">resources/schemas/Extract.xsd</ctlp:schema>-->
+            </ctlp:schemas>
+          </ctlp:XMLValidatingParser>
+        </ctl:request>
+      </xsl:variable> 
+      <xsl:if test="not($response/*)">
+        <ctl:message>[FAIL] Missing or invalid response entity.</ctl:message>
+        <ctl:fail />
+      </xsl:if>
     </ctl:code>
   </ctl:test>
 

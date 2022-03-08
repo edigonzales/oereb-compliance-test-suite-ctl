@@ -63,6 +63,9 @@ $te_install/bin/unix/viewlog.sh -logdir=$TE_BASE/users/stefan/ -session=s0004
 ## TODO
 
 - Schemaprüfung ohne Java-Code?
+  * url funktioniert mit getegrid (ohne geometrie)
+  * file scheint bei relativen Pfaden das Verzeichnis als Root zu verwenden, wo man den Befehl startet (nicht so praktisch)
+  * -> resource: Schema muss im Classpaths sein.
 - HTML-Report
 - Paketierung 
 - Organisation Code in Repo (-> siehe die Github-Repos der ets-XXXX)
