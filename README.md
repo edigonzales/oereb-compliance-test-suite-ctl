@@ -35,6 +35,8 @@ unzip teamengine-console/target/teamengine-console-5.5-SNAPSHOT-base.zip -d $TE_
 
 ## Run sample test suite
 
+
+### Official
 ```
 $te_install/bin/unix/test.sh -source=$TE_BASE/scripts/note/1.0/ctl/note.ctl
 ```
@@ -48,6 +50,15 @@ Show log files:
 ```
 $te_install/bin/unix/viewlog.sh -logdir=$TE_BASE/users/stefan/ -session=s0004
 ```
+
+### Own distribution
+```
+./oereb-cts-2.0.LOCALBUILD/bin/app -source=/Users/stefan/tmp/oereb-compliance-test-suite/app/build/distributions/oereb-cts-2.0.LOCALBUILD/te_base/scripts/oereb/2.0/ctl/main.ctl
+```
+
+- Absoluter Pfad?
+- Wo landet das Resultat?
+
 
 ## Examples
 

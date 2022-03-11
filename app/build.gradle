@@ -1,0 +1,73 @@
+plugins {
+    id 'application'
+}
+
+apply from: "$rootDir/gradle/versioning.gradle"
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+configurations {
+  teres
+}
+
+configurations.implementation {
+    exclude group: 'org.opengis.cite.teamengine', module: 'teamengine-resources'
+}
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+
+    implementation 'org.opengis.cite.teamengine:teamengine-core:5.5-SNAPSHOT'
+    implementation 'org.opengis.cite.teamengine:teamengine-spi:5.5-SNAPSHOT'
+    
+    teres "org.opengis.cite.teamengine:teamengine-resources:5.5-SNAPSHOT"
+}
+
+application {
+    mainClass = 'ch.so.agi.oereb.cts.Test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.distTar {
+    compression = Compression.GZIP
+}
+
+distributions {
+    main {
+        distributionBaseName = 'oereb-cts'
+        contents {
+            // TODO
+            into('te_base') {
+                from 'src/main/te_base'
+            }            
+            // Es wird der Inhalt (die Dateien) von 'teameninge-resources' auf das 
+            // Filesystem kopiert.
+            // Das sind z.B. XSLT-Dateien und CTL-Skripte. Die Jar-Datei muss
+            // entpackt werden und als Abhängigkeit exkludiert werden.
+            into('lib/resources') {
+                from configurations.teres.collect { zipTree(it) }
+                exclude "**/META-INF/**"
+            }
+        }
+    }
+}
+
+startScripts {
+    // Damit wird das Verzeichnis 'lib/resources' dem CLASSPATH im Startskript hzinzugefuegt.
+    // Erst so werden die Ressourcen zur Laufzeit auch gefunden.
+    classpath += files('resources/')
+}
+
+run {
+    args = ["-source=$rootDir/app/src/main/te_base/scripts/oereb/2.0/ctl/main.ctl"]
+}
