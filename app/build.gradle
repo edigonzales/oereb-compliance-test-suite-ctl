@@ -26,12 +26,13 @@ dependencies {
 
     implementation 'org.opengis.cite.teamengine:teamengine-core:5.5-SNAPSHOT'
     implementation 'org.opengis.cite.teamengine:teamengine-spi:5.5-SNAPSHOT'
+    //runtimeOnly files("/Users/stefan/apps/te_install/resources/") 
     
     teres "org.opengis.cite.teamengine:teamengine-resources:5.5-SNAPSHOT"
 }
 
 application {
-    mainClass = 'ch.so.agi.oereb.cts.Test'
+    mainClass = 'ch.so.agi.oereb.cts.App'
 }
 
 tasks.named('test') {
@@ -50,10 +51,14 @@ distributions {
             into('te_base') {
                 from 'src/main/te_base'
             }            
-            // Es wird der Inhalt (die Dateien) von 'teameninge-resources' auf das 
+            // Es wird der Inhalt (die Dateien) von 'teamengine-resources' auf das 
             // Filesystem kopiert.
             // Das sind z.B. XSLT-Dateien und CTL-Skripte. Die Jar-Datei muss
             // entpackt werden und als Abhängigkeit exkludiert werden.
+            // Die Dateien duerfen nicht in einer Jar-Datei gepackt sein, sonst
+            // funktioniert es nicht. Es funktioniert auch nicht, wenn sie auf 
+            // dem Filesystem vorliegen und zusaetzlich in einer Jar-Datei 
+            // vorhanden sind.
             into('lib/resources') {
                 from configurations.teres.collect { zipTree(it) }
                 exclude "**/META-INF/**"
@@ -63,11 +68,28 @@ distributions {
 }
 
 startScripts {
-    // Damit wird das Verzeichnis 'lib/resources' dem CLASSPATH im Startskript hzinzugefuegt.
+    // Damit wird das Verzeichnis 'lib/resources' dem CLASSPATH im Startskript hinzugefuegt.
     // Erst so werden die Ressourcen zur Laufzeit auch gefunden.
     classpath += files('resources/')
 }
 
+
 run {
+    classpath = sourceSets.main.runtimeClasspath + files("$buildDir/teres")
     args = ["-source=$rootDir/app/src/main/te_base/scripts/oereb/2.0/ctl/main.ctl"]
+    //systemProperty "TE_BASE", "/Users/stefan/tmp/"
 }
+
+
+// Die Ressourcen duerfen nicht in ein Verzeichnis kopiert werden, von wo
+// sie anschliessend in die Distribution in einer Jar-Datei gepackt werden.
+// Dient ausschliesslich dazu, dass ./gradlew run funktioniert.
+task copyTeamengineResources(type: Copy) {
+    from configurations.teres.collect { zipTree(it) }
+    into("$buildDir/teres")
+    exclude "**/META-INF/**"
+    
+}
+compileJava.dependsOn copyTeamengineResources
+
+
