@@ -6,6 +6,12 @@ public class App {
         
         System.out.println("Hallo Welt.");
         
+        
+        // TODO:
+        // -source -> oereb ctl
+        // - falls kein output, user.home verwenden.
+        
+        
         System.setProperty("TE_BASE", "/Users/stefan/tmp/");
 
         Test test = new Test();
