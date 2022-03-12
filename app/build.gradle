@@ -71,12 +71,13 @@ startScripts {
     // Damit wird das Verzeichnis 'lib/resources' dem CLASSPATH im Startskript hinzugefuegt.
     // Erst so werden die Ressourcen zur Laufzeit auch gefunden.
     classpath += files('resources/')
+    //defaultJvmOpts = ['-DmainCtl=$APP_HOME/te_base/scripts/oereb/2.0/ctl/main.ctl']
 }
 
 
 run {
     classpath = sourceSets.main.runtimeClasspath + files("$buildDir/teres")
-    args = ["-source=$rootDir/app/src/main/te_base/scripts/oereb/2.0/ctl/main.ctl"]
+    args = ["--ctl", "$rootDir/app/src/main/te_base/scripts/oereb/2.0/ctl/main.ctl"]
     //systemProperty "TE_BASE", "/Users/stefan/tmp/"
 }
 

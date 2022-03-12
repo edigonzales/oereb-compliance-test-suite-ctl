@@ -76,8 +76,9 @@ $te_install/bin/unix/viewlog.sh -logdir=$TE_BASE/users/stefan/ -session=s0004
 - Schemaprüfung ohne Java-Code?
   * url funktioniert mit getegrid (ohne geometrie)
   * file scheint bei relativen Pfaden das Verzeichnis als Root zu verwenden, wo man den Befehl startet (nicht so praktisch)
-  * -> resource: Schema muss im Classpaths sein.
+  * -> resource: Schema muss im Classpaths sein. -> Aber geht es wenn andere importiert werden? -> Sonst auf Github-Repo Raw zeigen. Oder ins lib/resources kopieren.
 - HTML-Report
 - Paketierung 
 - Organisation Code in Repo (-> siehe die Github-Repos der ets-XXXX)
 - Was genau ist all-in-one? Alles ausser teamengine runtime? Wie startet man das aber?
+- Schema location passe ich wohl soweit an, dass alle im gleichen Verzeichnis liegen.
