@@ -123,7 +123,8 @@
     <ctl:param name="base-url"></ctl:param>
     <ctl:param name="en-coord"></ctl:param>
 
-    <ctl:assertion>GetEGRID</ctl:assertion>
+    <ctl:assertion>Die Antwort eines GetEGRID-Requests (ohne Parameter) ist schemakonform.</ctl:assertion>
+    <ctl:comment>Ein Kommentar, ein Kommentar.</ctl:comment>
     <ctl:code>
       <xsl:variable name="response">
 
@@ -132,7 +133,8 @@
           <ctl:method>GET</ctl:method>
           <ctlp:XMLValidatingParser>
             <ctlp:schemas>
-              <ctlp:schema type="url">http://schemas.geo.admin.ch/V_D/OeREB/2.0/Extract.xsd</ctlp:schema>
+              <ctlp:schema type="resource">schemas/oereb/2_0/Extract.xsd</ctlp:schema>
+              <!--<ctlp:schema type="url">http://schemas.geo.admin.ch/V_D/OeREB/2.0/Extract.xsd</ctlp:schema>-->
               <!--<ctlp:schema type="file">resources/schemas/Extract.xsd</ctlp:schema>-->
             </ctlp:schemas>
           </ctlp:XMLValidatingParser>
@@ -141,7 +143,7 @@
         <ctl:message><xsl:value-of select="$response"/></ctl:message>
 
       <xsl:if test="not($response/*)">
-        <ctl:message>[FAIL] Missing or invalid response entity.</ctl:message>
+        <ctl:message>[FAIL] Antwort ist nicht schemakonform.</ctl:message>
         <ctl:fail />
       </xsl:if>
     </ctl:code>

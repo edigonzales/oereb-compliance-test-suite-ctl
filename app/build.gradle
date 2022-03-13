@@ -77,8 +77,8 @@ startScripts {
 
 run {
     classpath = sourceSets.main.runtimeClasspath + files("$buildDir/teres")
-    args = ["--ctl", "$rootDir/app/src/main/te_base/scripts/oereb/2.0/ctl/main.ctl"]
-    //systemProperty "TE_BASE", "/Users/stefan/tmp/"
+    args = ["--ctl", "$rootDir/app/src/main/te_base/scripts/oereb/2_0/ctl/main.ctl"]
+    // TODO: Braucht es nicht mehr: systemProperty "TE_BASE", "/Users/stefan/tmp/"
 }
 
 

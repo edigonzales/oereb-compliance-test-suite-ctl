@@ -86,6 +86,7 @@ public class Test {
     public void execute(String[] args) throws Exception {
         String cmd = "java com.occamlab.te.Test";
         File workDir = setupOpts.getWorkDir();
+        System.out.println("workDir: " + workDir);
         runOpts.setWorkDir(workDir);
         File logDir = runOpts.getLogDir();
         String session = null;
@@ -185,6 +186,7 @@ public class Test {
         // Set session
         if (session == null) {
             session = System.getProperty("team.session");
+            System.out.println("session: " + session);
         }
         if (session == null) {
             if (logDir == null) {
@@ -232,6 +234,9 @@ public class Test {
             DocumentationHelper docLogs = new DocumentationHelper(
                     cl.getResource("com/occamlab/te/test_report_html.xsl"));
             docLogs.prettyPrintsReport(logDir);
+            
+            System.out.println("-----------------------------------logDir: " + logDir);
+
             return;
         }
         if (mode == TEST_MODE || mode == CHECK_MODE) {
